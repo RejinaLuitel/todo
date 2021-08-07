@@ -72,6 +72,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize: 20,
                     ),
                   ),
+                  leading: IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () async{
+                      String editedText;
+                     await showDialog(context: context, builder: (context) {
+                        return AlertDialog(
+                          title: Text('Edit Todos'),
+                          content: TextFormField(
+                            initialValue: todos[index],
+                            onChanged: (value){
+                              editedText= value;
+                            },
+                          ),
+                          actions: [
+                            TextButton(onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+
+                                child: Text('save'))
+                          ],
+                        );
+                      },
+                      );
+                      setState(() {
+                        todos[index]=editedText;
+                      });
+                    },
+                  ),
                   trailing: IconButton(
                     icon: Icon(Icons.delete, color: Colors.red),
                     onPressed: (){
